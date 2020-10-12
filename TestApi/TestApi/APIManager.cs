@@ -36,7 +36,7 @@ namespace TestApi
             response.Close();
 
             if (data == null)
-                throw new Exception("Failed to get data");
+                throw new Exception("Failed to get data from server");
 
             return data;
         }

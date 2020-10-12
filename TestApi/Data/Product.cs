@@ -1,11 +1,6 @@
 ﻿namespace Data
 {
-    public interface IProductBase
-    {
-        public int CategoryId { get; set; }
-    }
-
-    public class Product : IModelBase, IProductBase
+    public class Product : IModelBase
     {
         public int Id { get; set; }
         public string Name { get; set; }

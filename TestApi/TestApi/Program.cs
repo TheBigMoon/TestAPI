@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data;
+using System;
 using TestApi.Models;
 using TestAPI;
 
@@ -11,19 +12,19 @@ namespace TestApi
             string requestString = "http://tester.consimple.pro";
             APIManager manager = new APIManager();
 
-            bool isOpen = true;
-            while (isOpen)
+            bool isOpenApp = true;
+            while (isOpenApp)
             {
-                string getData = Informer.IsGetData();
+                string getDataAnswer = DisplayManager.DisplayGetDataQuestion();
 
-                if(getData == "y")
+                if(getDataAnswer == "y")
                 {
                     try
                     {
                         var request = manager.GetRequest(requestString);
                         var response = manager.GetResponse(request);
                         ProductModel data = manager.GetData<ProductModel>(response);
-                        Informer.ShowProductInfo(data);
+                        DisplayManager.ShowProductInfo(data);
                     }
                     catch (Exception ex)
                     {
@@ -33,18 +34,18 @@ namespace TestApi
                 }
                 else
                 {
-                    Console.WriteLine("Данные введены неверно");
+                    Console.WriteLine(Constants.ErrorMessages.IncorrectInputData);
                 }
 
-                string isClose = Informer.IsCloseApp();
+                string closeAppAnswer = DisplayManager.DisplayCloseAppQuestion();
 
-                if(isClose == "y")
+                if(closeAppAnswer == "y")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Данные введены неверно");
+                    Console.WriteLine(Constants.ErrorMessages.IncorrectInputData);
                 }
             }
         }
