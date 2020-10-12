@@ -1,13 +1,13 @@
 ﻿using Data;
 using System;
 using System.Linq;
-using TestAPI.Models;
+using TestApi.Models;
 
 namespace TestAPI
 {
-    public static class Informer
+    public static class DisplayManager
     {
-        public static void ShowProductInfo(IProductModel model) 
+        public static void ShowProductInfo(ProductModel model) 
         {
             int maxSpace = 30;
 
@@ -19,7 +19,7 @@ namespace TestAPI
 
             foreach (Product prod in model.Products)
             {
-                IModelBase category = model.Categories
+                Category category = model.Categories
                     .Where(x => x.Id == prod.CategoryId)
                     .FirstOrDefault();
 
@@ -30,13 +30,13 @@ namespace TestAPI
             }
         }
 
-        public static string IsGetData()
+        public static string DisplayGetDataQuestion()
         {
             string result;
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Получить данные с сервера?");
-            Console.WriteLine("Для подтверждения нажмите \"Y\" и нажмите ENTER");
+            Console.WriteLine(Constants.DisplayManager.GetDataQuestion);
+            Console.WriteLine(Constants.DisplayManager.ConfirmInput);
             Console.ResetColor();
             
             result = Console.ReadLine().ToLower();
@@ -44,20 +44,18 @@ namespace TestAPI
             return result;
         }
 
-        public static string IsCloseApp()
+        public static string DisplayCloseAppQuestion()
         {
             string result;
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Закрыть приложение?");
-            Console.WriteLine("Для подтверждения введите \"Y\" и нажмите ENTER");
+            Console.WriteLine(Constants.DisplayManager.CloseAppQuestion);
+            Console.WriteLine(Constants.DisplayManager.ConfirmInput);
             Console.ResetColor();
 
             result = Console.ReadLine().ToLower();
 
             return result;
         }
-
-
     }
 }
